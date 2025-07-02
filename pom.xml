@@ -19,7 +19,6 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <version>LATEST</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.platform</groupId>
@@ -41,6 +40,16 @@
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>LATEST</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-edge-driver</artifactId>
+            <version>4.34.0</version> <!-- Используйте актуальную версию -->
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-chrome-driver</artifactId>
+            <version>LATEST</version> <!-- Используйте актуальную версию -->
         </dependency>
     </dependencies>
     <build>
