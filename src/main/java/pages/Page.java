@@ -5,10 +5,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 public class Page {
     private final WebDriver driver;
     public String productName;
+    public String cartProductName;
 
     // Локаторы элементов
     private final By selectProductBtn = By.xpath("//*[@class='product-image-photo']");
@@ -18,8 +20,10 @@ public class Page {
     private final By addToCartBtn = By.xpath("//button[@title='Add to Cart']");
     private final By showMiniCartBtn = By.xpath("//a[@class=\"action showcart\" and @data-bind=\"scope: 'minicart_content'\"]");
     private final By goToCartBtn = By.xpath("//span[text()='View and Edit Cart']");
-    private final By deleteFromCartBtn = By.xpath("//a[@title='Remove item']");
-
+    private final By deleteFromCartBtn = By.xpath("//a[@class='action action-delete']");
+    private final By cartProductNameLbl = By.xpath("//tbody[@class='cart item']//strong[@class='product-item-name']/a");
+    private final By isCartEmptyLbl = By.xpath("//div[@class='cart-empty']/p");
+    private final By notSelectedSizeColorLbl = By.xpath("//div[@class='mage-error']");
 
 
     public Page(WebDriver driver) {
@@ -33,7 +37,7 @@ public class Page {
     // Методы взаимодействия с элементами
     public void delay() {
         try {
-            Thread.sleep(15000);
+            Thread.sleep(6000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -80,9 +84,20 @@ public class Page {
         deleteFromCart.click();
     }
 
-    public void cartCheck() {
-        // Создаем локатор динамически с текущим значением productName
-        By cartCheckBtn = By.xpath(String.format("//a[text()='%s']", productName));
-        WebElement cartCheck = driver.findElement(cartCheckBtn);
+    public String cartProductName() {
+        WebElement cartProductNameElement = driver.findElement(cartProductNameLbl);
+        cartProductName = cartProductNameElement.getText();
+        return cartProductName;
     }
+
+     public boolean isCartEmpty() {
+        WebElement noItemsCartElement = driver.findElement(isCartEmptyLbl);
+        return noItemsCartElement.isDisplayed();
+    }
+
+    public boolean notSelectedSizeColor() {
+        WebElement notSelectedSizeColorElement = driver.findElement(notSelectedSizeColorLbl);
+        return notSelectedSizeColorElement.isDisplayed();
+    }
+
 }

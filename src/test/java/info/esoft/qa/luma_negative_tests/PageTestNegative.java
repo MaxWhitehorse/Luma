@@ -3,19 +3,15 @@ package info.esoft.qa.luma_positive_tests;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.Page;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import java.time.Duration;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class PageTest {
+public class PageTestNegative {
     private static WebDriver driver;
     private static Page productPage;
 
@@ -34,35 +30,11 @@ public class PageTest {
     }
 
     @Test
-    public void testAddToCart() {
+    public void addToCartNoSizeAndColor() {
         productPage.selectProduct();
-        String product_name = productPage.saveProductName();
-        productPage.selectSizeM();
-        productPage.selectColorBlackMen();
         productPage.clickAddToCart();
         productPage.delay();
-        productPage.showMiniCart();
-        productPage.delay();
-        productPage.goToCart();
-        productPage.delay();
-        String cart_product_name = productPage.cartProductName();
-        assertEquals(product_name, cart_product_name);
-    }
-
-    @Test
-    public void deleteFromCart() {
-        productPage.selectProduct();
-        productPage.selectSizeM();
-        productPage.selectColorBlackMen();
-        productPage.clickAddToCart();
-        productPage.delay();
-        productPage.showMiniCart();
-        productPage.delay();
-        productPage.goToCart();
-        productPage.delay();
-        productPage.deleteFromCart();
-        productPage.delay();
-        assertTrue(productPage.isCartEmpty());
-        System.out.println("Is cart empty: " + productPage.isCartEmpty());
+        assertTrue(productPage.notSelectedSizeColor());
+        System.out.println("notSelectedSizeColor: " + productPage.notSelectedSizeColor());
     }
 }
